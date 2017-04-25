@@ -1,7 +1,7 @@
 ## 3rd Party Cookie Checker
 
 ### Purpose
-This repository is hosted on GitHub Pages in order to check whether 3rd party cookies are enabled.
+This repository is hosted on [GitHub Pages](https://cleantelligent.github.io/3rdPartyCookieChecker/) in order to check whether 3rd party cookies are enabled.
 
 ### Instructions
 Here is the client-side HTML required to check if 3rd party cookies are enabled or disabled:
