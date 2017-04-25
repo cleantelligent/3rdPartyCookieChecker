@@ -1,37 +1,25 @@
-## Welcome to GitHub Pages
+## 3rd Party Cookie Checker
 
-You can use the [editor on GitHub](https://github.com/cleantelligent/3rdPartyCookieChecker/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+### Purpose
+This repository is hosted on GitHub Pages in order to check whether 3rd party cookies are enabled.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Instructions
+Here is the client-side HTML required to check if 3rd party cookies are enabled or disabled:
 
 ```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+<iframe src="https://cleantelligent.github.io/3rdPartyCookieChecker/3rdPartyCookieChecker.html" style="display:none"></iframe>
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Here is the client-side JavaScript used to add an event listener:
 
-### Jekyll Themes
+```markdown
+var receiveMessage = function (e) {
+  if (e.data === 'CT-3rdPartyCookiesDisabled') {
+    // $('div#thirdPartyCookiesDisabled').show();
+  }
+};
+window.addEventListener("message", receiveMessage, false);
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/cleantelligent/3rdPartyCookieChecker/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### How it works
+3rdPartyCookieChecker.html creates the cookie named ctCookie and sets its value to true. It then redirects to 3rdPartyCookieVerifier.html, which checks if the cookie has been set. Since we are including 3rdPartyCookieChecker.html via an iframe on the client side, cleantelligent.github.io is considered a 3rd party. We then add an event listener to wait for 3rdPartyCookieVerifier.html to post a message letting the client know if 3rd party cookies are enabled or disabled. It may be wise to set a timeout when waiting for the message to be posted, just in case there is some sort of network error.
